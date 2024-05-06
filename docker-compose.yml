@@ -1,0 +1,21 @@
+services:
+  rstudio:
+    build:
+      context: ./dockerfiles/
+      dockerfile: Dockerfile
+    ports:
+      - "8787:8787"
+    environment:
+      - PASSWORD=root
+      - DISPLAY=10.0.75.1:0.0
+      - DISABLE_AUTH=TRUE    
+    volumes:
+      - ./data/:/home/rstudio/data/
+      - /home/hikaru/.cache_docker_volume/cmdstan/:/home/rstudio/.cmdstan/
+      - /home/hikaru/.cache_docker_volume/renv/:/home/rstudio/.cache/
+      - virtualenvs:/home/rstudio/.virtualenvs/
+      - ./Setting_Rstudio/:/home/rstudio/.config/rstudio/
+    restart: always    
+
+volumes:
+  virtualenvs:
